@@ -31,7 +31,7 @@ val bookService: BookService) {
         }
         customerRepository.save(customer)
     }
-    
+
     fun delete(id: Int) {
         val customer = findById(id)
         bookService.deleteByCustomer(customer)
