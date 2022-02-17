@@ -4,6 +4,8 @@ import br.com.eliasjr.mercadolivro.controller.request.PostBookRequest
 import br.com.eliasjr.mercadolivro.controller.request.PostCustomerRequest
 import br.com.eliasjr.mercadolivro.controller.request.PutBookRequest
 import br.com.eliasjr.mercadolivro.controller.request.PutCustomerRequest
+import br.com.eliasjr.mercadolivro.controller.response.BookResponse
+import br.com.eliasjr.mercadolivro.controller.response.CustomerResponse
 import br.com.eliasjr.mercadolivro.enums.BookStatus
 import br.com.eliasjr.mercadolivro.enums.CustomerStatus
 import br.com.eliasjr.mercadolivro.model.BookModel
@@ -33,5 +35,24 @@ fun PutBookRequest.toBookModel(previousValue: BookModel): BookModel {
         price = this.price ?: previousValue.price,
         status = previousValue.status,
         customer = previousValue.customer
+    )
+}
+
+fun CustomerModel.toResponse(): CustomerResponse {
+    return CustomerResponse(
+        id = this.id,
+        name = this.name,
+        email = this.email,
+        status = this.status
+    )
+}
+
+fun BookModel.toResponse(): BookResponse {
+    return BookResponse(
+        id = this.id,
+        name = this.name,
+        price = this.price,
+        customer = this.customer,
+        status = this.status
     )
 }
