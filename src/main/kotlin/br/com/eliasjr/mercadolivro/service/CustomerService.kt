@@ -1,5 +1,6 @@
 package br.com.eliasjr.mercadolivro.service
 
+import br.com.eliasjr.mercadolivro.enums.CustomerStatus
 import br.com.eliasjr.mercadolivro.model.CustomerModel
 import br.com.eliasjr.mercadolivro.repository.CustomerRepository
 import org.springframework.stereotype.Service
@@ -30,12 +31,11 @@ val bookService: BookService) {
         }
         customerRepository.save(customer)
     }
-
-
-
+    
     fun delete(id: Int) {
         val customer = findById(id)
         bookService.deleteByCustomer(customer)
-        customerRepository.deleteById(id)
+        customer.status = CustomerStatus.INATIVO
+        customerRepository.save(customer)
     }
 }
