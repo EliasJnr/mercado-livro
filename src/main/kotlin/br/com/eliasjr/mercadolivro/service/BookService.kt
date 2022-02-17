@@ -6,10 +6,10 @@ import br.com.eliasjr.mercadolivro.repository.BookRepository
 import org.springframework.stereotype.Service
 
 @Service
-class BookService (
+class BookService(
     val bookRepository: BookRepository
-){
-    fun findById(id: Int): BookModel{
+) {
+    fun findById(id: Int): BookModel {
         return bookRepository.findById(id).orElseThrow()
     }
 
@@ -28,6 +28,10 @@ class BookService (
     fun delete(id: Int) {
         val book = findById(id)
         book.status = BookStatus.CANCELADO
+        update(book)
+    }
+
+    fun update(book: BookModel) {
         bookRepository.save(book)
     }
 

@@ -5,7 +5,7 @@ import java.math.BigDecimal
 import javax.persistence.*
 
 @Entity(name = "book")
-data class BookModel (
+data class BookModel(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
