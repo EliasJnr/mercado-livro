@@ -1,6 +1,8 @@
 package br.com.eliasjr.mercadolivro.model
 
 import br.com.eliasjr.mercadolivro.enums.BookStatus
+import br.com.eliasjr.mercadolivro.enums.Errors
+import br.com.eliasjr.mercadolivro.exception.BadRequestException
 import java.math.BigDecimal
 import javax.persistence.*
 
@@ -28,7 +30,7 @@ data class BookModel(
     var status: BookStatus? = null
         set(value) {
             if (field == BookStatus.CANCELADO || field == BookStatus.DELETADO)
-                throw Exception("Não é possivel alterar um livro com status ${field.toString()}")
+                throw BadRequestException(Errors.ML102.message.format(field), Errors.ML102.code)
 
             field = value
         }
