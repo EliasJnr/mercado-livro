@@ -1,6 +1,7 @@
 package br.com.eliasjr.mercadolivro.service
 
 import br.com.eliasjr.mercadolivro.enums.BookStatus
+import br.com.eliasjr.mercadolivro.enums.Errors
 import br.com.eliasjr.mercadolivro.exception.NotFoundException
 import br.com.eliasjr.mercadolivro.model.BookModel
 import br.com.eliasjr.mercadolivro.model.CustomerModel
@@ -14,7 +15,7 @@ class BookService(
     val bookRepository: BookRepository
 ) {
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow{ NotFoundException("Book [${id}] not exists", "ML-0001")}
+        return bookRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML101.message.format(id), Errors.ML101.code)}
     }
 
     fun create(book: BookModel) {
