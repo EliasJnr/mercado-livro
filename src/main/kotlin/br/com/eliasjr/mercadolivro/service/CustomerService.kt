@@ -1,13 +1,16 @@
 package br.com.eliasjr.mercadolivro.service
 
 import br.com.eliasjr.mercadolivro.enums.CustomerStatus
+import br.com.eliasjr.mercadolivro.exception.NotFoundException
 import br.com.eliasjr.mercadolivro.model.CustomerModel
 import br.com.eliasjr.mercadolivro.repository.CustomerRepository
 import org.springframework.stereotype.Service
 
 @Service
-class CustomerService(val customerRepository: CustomerRepository,
-val bookService: BookService) {
+class CustomerService(
+    val customerRepository: CustomerRepository,
+    val bookService: BookService
+) {
 
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
@@ -22,7 +25,7 @@ val bookService: BookService) {
 
     fun findById(id: Int): CustomerModel {
         return customerRepository.findById(id)
-            .orElseThrow()
+            .orElseThrow { NotFoundException("Customer [${id}] not exists", "ML-0002") }
     }
 
     fun update(customer: CustomerModel) {
