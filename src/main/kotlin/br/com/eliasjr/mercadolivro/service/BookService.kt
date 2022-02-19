@@ -15,7 +15,8 @@ class BookService(
     val bookRepository: BookRepository
 ) {
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML101.message.format(id), Errors.ML101.code)}
+        return bookRepository.findById(id)
+            .orElseThrow { NotFoundException(Errors.ML101.message.format(id), Errors.ML101.code) }
     }
 
     fun create(book: BookModel) {
@@ -46,6 +47,10 @@ class BookService(
             book.status = BookStatus.DELETADO
         }
         bookRepository.saveAll(books)
+    }
+
+    fun findAllByIds(bookIds: Set<Int>): List<BookModel> {
+        return bookRepository.findAllById(bookIds).toList()
     }
 
 }
