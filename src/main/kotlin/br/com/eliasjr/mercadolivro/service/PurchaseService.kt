@@ -18,5 +18,9 @@ class PurchaseService(
         applcationEventPublisher.publishEvent(PurchaseEvent(this, purchaseModel))
     }
 
+    fun update(purchaseModel: PurchaseModel) {
+        purchaseRepository.save(purchaseModel)
+    }
+
 
 }
