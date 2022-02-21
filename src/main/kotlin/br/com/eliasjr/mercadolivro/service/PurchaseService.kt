@@ -15,7 +15,10 @@ class PurchaseService(
     fun create(purchaseModel: PurchaseModel) {
         purchaseRepository.save(purchaseModel)
 
+        println("disparando evento de compra")
         applcationEventPublisher.publishEvent(PurchaseEvent(this, purchaseModel))
+        println("finalização do processamento")
+
     }
 
     fun update(purchaseModel: PurchaseModel) {
