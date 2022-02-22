@@ -10,3 +10,7 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false
+
+jwt:
+  secret: af216ec1-a5de-426d-9d72-a74ac3204664
+  expiration: 999999

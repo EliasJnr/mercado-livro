@@ -2,6 +2,7 @@ package br.com.eliasjr.mercadolivro.config
 
 import br.com.eliasjr.mercadolivro.repository.CustomerRepository
 import br.com.eliasjr.mercadolivro.security.AuthenticationFilter
+import br.com.eliasjr.mercadolivro.security.JwtUtil
 import br.com.eliasjr.mercadolivro.service.UserDetailsCustomerService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,7 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @EnableWebSecurity
 class SecurityConfig(
     private val userDetails: UserDetailsCustomerService,
-    private val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository,
+    private val jwtUtil: JwtUtil
 ) : WebSecurityConfigurerAdapter() {
 
     private val PUBLIC_MATCHERS = arrayOf<String>()
@@ -37,7 +39,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATHERS).permitAll()
             .anyRequest().authenticated()
 
-        http.addFilter(AuthenticationFilter(authenticationManager(), customerRepository))
+        http.addFilter(AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil))
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
