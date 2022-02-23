@@ -3,7 +3,9 @@ package br.com.eliasjr.mercadolivro.controllerKg
 import br.com.eliasjr.mercadolivro.controller.request.PostBookRequest
 import br.com.eliasjr.mercadolivro.controller.request.PutBookRequest
 import br.com.eliasjr.mercadolivro.controller.response.BookResponse
+import br.com.eliasjr.mercadolivro.controller.response.PageResponse
 import br.com.eliasjr.mercadolivro.extension.toBookModel
+import br.com.eliasjr.mercadolivro.extension.toPageResponse
 import br.com.eliasjr.mercadolivro.extension.toResponse
 import br.com.eliasjr.mercadolivro.service.BookService
 import br.com.eliasjr.mercadolivro.service.CustomerService
@@ -29,8 +31,8 @@ class BookController(
     }
 
     @GetMapping
-    fun findAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> {
-        return bookService.findAll(pageable).map { it.toResponse() }
+    fun findAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): PageResponse<BookResponse> {
+        return bookService.findAll(pageable).map { it.toResponse() }.toPageResponse()
     }
 
     @GetMapping("/active")
