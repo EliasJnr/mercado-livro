@@ -28,7 +28,7 @@ class AuthenticationFilter(
             throw AuthenticationException("Falha ao autenticar", "999")
         }
     }
- 
+
     override fun successfulAuthentication(
         request: HttpServletRequest,
         response: HttpServletResponse,
