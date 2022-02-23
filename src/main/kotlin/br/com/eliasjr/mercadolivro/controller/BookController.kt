@@ -1,4 +1,4 @@
-package br.com.eliasjr.mercadolivro.controller
+package br.com.eliasjr.mercadolivro.controllerKg
 
 import br.com.eliasjr.mercadolivro.controller.request.PostBookRequest
 import br.com.eliasjr.mercadolivro.controller.request.PutBookRequest
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("book")
+@RequestMapping("books")
 class BookController(
-    val bookService: BookService,
-    val customerService: CustomerService
+   private val bookService: BookService,
+   private val customerService: CustomerService
 ) {
 
     @PostMapping
